@@ -18,12 +18,32 @@
         }
 
         /* ================= 🚨 强效横屏提示遮罩 ================= */
+  
         #rotate-overlay { 
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
             background: #1a1a1a; z-index: 999999; color: white; 
-            flex-direction: column; justify-content: center; align-items: center; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; /* 🌟 核心：强制所有内部文字水平居中 */
+            padding: 20px; /* 防止文字贴到手机边缘 */
         }
-        @media (orientation: portrait) { #rotate-overlay { display: flex; } }
+        @media (orientation: portrait) { 
+            #rotate-overlay { display: flex; } 
+            
+            /* 🌟 核心：当处于手机竖屏时，自动把大标题改小并微调间距 */
+            #rotate-overlay h1 {
+                font-size: clamp(24px, 6vw, 32px) !important; 
+                margin-bottom: 15px !important;
+            }
+            /* 🌟 核心：当处于手机竖屏时，自动把小描述文字改小，并控制最大宽度换行 */
+            #rotate-overlay p {
+                font-size: clamp(14px, 4vw, 16px) !important;
+                line-height: 1.5;
+                max-width: 280px; /* 限制宽度，让英文折行后依然好看 */
+                margin: 0 auto !important;
+            }
+        }
 
         #app { position: relative; width: 100%; height: 100%; display: flex; }
 
